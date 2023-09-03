@@ -4,13 +4,13 @@ import { staggerContainer } from './util/motion';
 import { styles } from './styles';
 
 const SectionWrapper = (
-  Component: React.ReactElement,
+  Component: React.JSX.Element,
   idName: string | undefined
 ) =>
   function HOC() {
     return (
       <motion.section
-        variants={staggerContainer()}
+        variants={staggerContainer(null, null)}
         initial='hidden'
         whileInView='show'
         viewport={{ once: true, amount: 0.25 }}

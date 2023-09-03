@@ -11,7 +11,7 @@ import { experiences } from '../constants';
 import { textVariant } from './util/motion';
 import { styles } from './styles';
 import Image, { StaticImageData } from 'next/image';
-import { type } from 'os';
+import SectionWrapper from './SectionWrapper';
 
 type Experience = {
   date: string;
@@ -77,4 +77,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default SectionWrapper(Experience, 'experience');
