@@ -4,7 +4,7 @@ import Experience from '@/components/Experience';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
-import StarsCanvas from '@/components/StarsCanvas';
+import StarsCanvas from '@/components/canvas/Star';
 import Tech from '@/components/Tech';
 import Image from 'next/image';
 
@@ -18,7 +18,6 @@ export default function Home() {
         </div>
         <About />
         <Experience />
-        <Tech />
         <div className='relative z-0'>
           <Contact />
           <StarsCanvas />
