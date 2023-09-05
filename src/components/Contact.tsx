@@ -5,18 +5,23 @@ import { styles } from './styles';
 import { slideIn } from './util/motion';
 import SectionWrapper from './SectionWrapper';
 import EarthCanvas from './canvas/Earth';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { type } from 'os';
+
+interface IContact {
+  name: string;
+  email: string;
+  msg: string;
+}
 
 const Contact = () => {
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
+  const { register, handleSubmit, reset } = useForm<IContact>({
+    defaultValues: { name: '', email: '', msg: '' },
   });
+
   const [loading, setLoading] = useState(false);
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+
+  const onSubmit: SubmitHandler<IContact> = (data) => reset();
 
   return (
     <div className='xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden'>
@@ -28,19 +33,14 @@ const Contact = () => {
         <h3 className={styles.sectionHeadText}>Contact</h3>
         <form
           action=''
-          ref={formRef}
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className='mt-12 flex flex-col gap-8'
         >
           <label htmlFor='' className='flex flex-col'>
             <span className='test-white font-medium mb-4'>Your Name</span>
             <input
               type='text'
-              name='name'
-              value={form.name}
-              onChange={handleChange}
-              placeholder='Whats your name '
-              id=''
+              {...register('name')}
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none
               border-none font-medium'
             />
@@ -49,11 +49,8 @@ const Contact = () => {
             <span className='test-white font-medium mb-4'>Your Email</span>
             <input
               type='email'
-              name='name'
-              value={form.email}
-              onChange={handleChange}
+              {...register('email')}
               placeholder='Whats your email '
-              id=''
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none
               border-none font-medium'
             />
@@ -62,9 +59,7 @@ const Contact = () => {
             <span className='test-white font-medium mb-4'>Message</span>
             <textarea
               rows={7}
-              name='message'
-              value={form.message}
-              onChange={handleChange}
+              {...register('msg')}
               placeholder='What do you want to say'
               id=''
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none
