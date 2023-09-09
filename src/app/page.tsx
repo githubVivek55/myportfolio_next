@@ -5,8 +5,6 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
 import StarsCanvas from '@/components/canvas/Star';
-import Tech from '@/components/Tech';
-import Image from 'next/image';
 import { Analytics } from '@vercel/analytics/react';
 
 export default function Home() {

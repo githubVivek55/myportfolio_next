@@ -30,6 +30,7 @@ import epam from './company/epam.png';
 import carrent from './carrent.png';
 import jobit from './jobit.png';
 import tripguide from './tripguide.png';
+import vlogo from './logov.svg';
 
 export {
   logo,
@@ -61,4 +62,5 @@ export {
   jobit,
   tripguide,
   java,
+  vlogo,
 };
