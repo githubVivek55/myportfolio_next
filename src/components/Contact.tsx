@@ -6,7 +6,8 @@ import { slideIn } from './util/motion';
 import SectionWrapper from './SectionWrapper';
 import EarthCanvas from './canvas/Earth';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { type } from 'os';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '@/app/firestore';
 
 interface IContact {
   name: string;
@@ -15,14 +16,21 @@ interface IContact {
 }
 
 const Contact = () => {
-  const { register, handleSubmit, reset } = useForm<IContact>({
+  const { register, handleSubmit, reset, formState } = useForm<IContact>({
     defaultValues: { name: '', email: '', msg: '' },
   });
 
   const [loading, setLoading] = useState(false);
 
-  const onSubmit: SubmitHandler<IContact> = (data) => reset();
-
+  const onSubmit: SubmitHandler<IContact> = async (data) => {
+    try {
+      const collRef = collection(db, 'messages');
+      await addDoc(collRef, data);
+    } catch (e) {
+      console.error(e);
+    }
+    reset();
+  };
   return (
     <div className='xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden'>
       <motion.div
@@ -40,7 +48,7 @@ const Contact = () => {
             <span className='test-white font-medium mb-4'>Your Name</span>
             <input
               type='text'
-              {...register('name')}
+              {...register('name', { required: true })}
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none
               border-none font-medium'
             />
@@ -49,7 +57,7 @@ const Contact = () => {
             <span className='test-white font-medium mb-4'>Your Email</span>
             <input
               type='email'
-              {...register('email')}
+              {...register('email', { required: true })}
               placeholder='Whats your email '
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none
               border-none font-medium'
@@ -59,7 +67,7 @@ const Contact = () => {
             <span className='test-white font-medium mb-4'>Message</span>
             <textarea
               rows={7}
-              {...register('msg')}
+              {...register('msg', { required: true })}
               placeholder='What do you want to say'
               id=''
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none
@@ -69,6 +77,7 @@ const Contact = () => {
           <button
             className='bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl'
             type='submit'
+            disabled={!formState.isValid}
           >
             {loading ? 'Sending...' : 'Send'}
           </button>
