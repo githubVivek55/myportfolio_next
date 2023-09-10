@@ -24,8 +24,10 @@ const Contact = () => {
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
     try {
+      setLoading(true);
       const collRef = collection(db, 'messages');
       await addDoc(collRef, data);
+      setLoading(false);
     } catch (e) {
       console.error(e);
     }
