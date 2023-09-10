@@ -26,7 +26,7 @@ const Contact = () => {
     try {
       setLoading(true);
       const collRef = collection(db, 'messages');
-      await addDoc(collRef, data);
+      await addDoc(collRef, { ...data, date: new Date() });
       setLoading(false);
     } catch (e) {
       console.error(e);
