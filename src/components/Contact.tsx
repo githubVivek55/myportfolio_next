@@ -24,8 +24,10 @@ const Contact = () => {
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
     try {
+      setLoading(true);
       const collRef = collection(db, 'messages');
-      await addDoc(collRef, data);
+      await addDoc(collRef, { ...data, date: new Date() });
+      setLoading(false);
     } catch (e) {
       console.error(e);
     }
@@ -76,7 +78,7 @@ const Contact = () => {
             />
           </label>
           <button
-            className='bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl'
+            className='hover:cursor-pointer hover:bg-[#667eea] bg-[#915eff] py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl'
             type='submit'
             disabled={!formState.isValid}
           >
