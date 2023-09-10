@@ -78,7 +78,7 @@ const Contact = () => {
             />
           </label>
           <button
-            className='bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl'
+            className='hover:cursor-pointer hover:bg-[#667eea] bg-[#915eff] py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl'
             type='submit'
             disabled={!formState.isValid}
           >
