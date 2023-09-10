@@ -4,7 +4,7 @@ import { styles } from './styles';
 import Link from 'next/link';
 import Image from 'next/image';
 import { navLinks } from '@/constants';
-import { close, logo, menu, vlogo } from '@/assets';
+import { close, menu, vlogo } from '@/assets';
 
 const Navbar = () => {
   const [active, setActive] = useState('');
@@ -22,7 +22,7 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <Image src={vlogo} alt='logo' className='w-12 h-12 object-contain' />
+          <Image src={vlogo} alt='logo' className='w-12 h-8 object-contain' />
           <p className='text-white text-[18px] font-bold cursor-pointer flex'>
             Wake<span className='sm:block hidden text-[#915eff]'>V</span>
           </p>
