@@ -126,6 +126,15 @@
   transform: translateZ(0);
 }
 
+.toast{
+  position: absolute;
+  top:20px;
+  left: 50%;
+  height: 50px;
+  width: 300px;
+  background-color: #804dee;
+}
+
 @keyframes mulShdSpin {
   0%,
   100% {

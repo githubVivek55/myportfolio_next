@@ -8,6 +8,7 @@ import EarthCanvas from './canvas/Earth';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/app/firestore';
+import Toast from './Toast';
 
 interface IContact {
   name: string;
@@ -92,6 +93,7 @@ const Contact = () => {
       >
         <EarthCanvas />
       </motion.div>
+      <Toast msg='testing toast msg' />
     </div>
   );
 };
