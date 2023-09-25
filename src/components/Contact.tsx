@@ -22,6 +22,7 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(true);
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
     try {
@@ -93,7 +94,12 @@ const Contact = () => {
       >
         <EarthCanvas />
       </motion.div>
-      <Toast msg='testing toast msg' />
+      <Toast
+        msg='testing toast msg'
+        type='confirm'
+        show={show}
+        onHide={() => setShow(false)}
+      />
     </div>
   );
 };

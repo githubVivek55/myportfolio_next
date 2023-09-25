@@ -1,0 +1,26 @@
+.toast{
+    padding: 10px 5px;
+    position: fixed;
+    top:15%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 400px;
+    max-height: 250px;
+    z-index: 9;
+    border-radius: 4px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.dismiss{
+    animation: slide-out 0.6s linear ;
+}
+@keyframes slide-out{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+.confirm{
+    background-color: green;
+}
