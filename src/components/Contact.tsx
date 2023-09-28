@@ -8,6 +8,7 @@ import EarthCanvas from './canvas/Earth';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/app/firestore';
+import Toast from './Toast';
 
 interface IContact {
   name: string;
@@ -21,6 +22,7 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
     try {
@@ -28,6 +30,7 @@ const Contact = () => {
       const collRef = collection(db, 'messages');
       await addDoc(collRef, { ...data, date: new Date() });
       setLoading(false);
+      setShow(true);
     } catch (e) {
       console.error(e);
     }
@@ -92,6 +95,14 @@ const Contact = () => {
       >
         <EarthCanvas />
       </motion.div>
+      {show && (
+        <Toast
+          msg='Message has been sent, will connect with you soon'
+          type='confirm'
+          show={show}
+          onHide={() => setShow(false)}
+        />
+      )}
     </div>
   );
 };
