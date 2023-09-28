@@ -22,7 +22,7 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
     try {
@@ -30,6 +30,7 @@ const Contact = () => {
       const collRef = collection(db, 'messages');
       await addDoc(collRef, { ...data, date: new Date() });
       setLoading(false);
+      setShow(true);
     } catch (e) {
       console.error(e);
     }
@@ -94,12 +95,14 @@ const Contact = () => {
       >
         <EarthCanvas />
       </motion.div>
-      <Toast
-        msg='testing toast msg'
-        type='confirm'
-        show={show}
-        onHide={() => setShow(false)}
-      />
+      {show && (
+        <Toast
+          msg='Message has been sent, will connect with you soon'
+          type='confirm'
+          show={show}
+          onHide={() => setShow(false)}
+        />
+      )}
     </div>
   );
 };
